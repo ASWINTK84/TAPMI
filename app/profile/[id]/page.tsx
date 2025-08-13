@@ -13,6 +13,7 @@ import { IoPlayCircle, IoPlayCircleOutline } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 
 interface Skill {
@@ -57,23 +58,28 @@ const visualResumeRef = useRef<HTMLDivElement>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("caseStudies"); 
+  console.log(userId);
+  
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch(`http://localhost:5000/api/users/${userId}`);
-        if (!res.ok) throw new Error("User not found");
-        const data: User = await res.json();
-        setUser(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+  const fetchUser = async () => {
+    try {
+      const { data } = await axios.get<User>(`https://backtapmi.onrender.com/api/users/${userId}`);
+      setUser(data);
+    } catch (error: any) {
+     
+      if (error.response && error.response.status === 404) {
+        console.error("User not found");
+      } else {
+        console.error(error.message || error);
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchUser();
-  }, [userId]);
+  if (userId) fetchUser();
+}, [userId]);
 
   if (loading) return <p>Loading...</p>;
   if (!user) return <p>User not found</p>;
