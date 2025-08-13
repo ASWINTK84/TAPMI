@@ -66,7 +66,7 @@ const visualResumeRef = useRef<HTMLDivElement>(null);
 useEffect(() => {
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get<User>(`http://localhost:5000/api/users/${userId}`);
+      const { data } = await axios.get<User>(`https://backtapmi.onrender.com/api/users/${userId}`);
       setUser(data);
     } catch (error: unknown) {
       if (error instanceof Error) {
