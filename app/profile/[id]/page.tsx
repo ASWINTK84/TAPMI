@@ -61,17 +61,18 @@ const visualResumeRef = useRef<HTMLDivElement>(null);
   console.log(userId);
   
 
-  useEffect(() => {
+ 
+
+useEffect(() => {
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get<User>(`https://backtapmi.onrender.com/api/users/${userId}`);
+      const { data } = await axios.get<User>(`http://localhost:5000/api/users/${userId}`);
       setUser(data);
-    } catch (error: any) {
-     
-      if (error.response && error.response.status === 404) {
-        console.error("User not found");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Fetch user failed:", error.message);
       } else {
-        console.error(error.message || error);
+        console.error("Unknown error:", error);
       }
     } finally {
       setLoading(false);
@@ -80,6 +81,7 @@ const visualResumeRef = useRef<HTMLDivElement>(null);
 
   if (userId) fetchUser();
 }, [userId]);
+
 
   if (loading) return <p>Loading...</p>;
   if (!user) return <p>User not found</p>;
