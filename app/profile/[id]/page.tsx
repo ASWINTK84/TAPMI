@@ -22,10 +22,12 @@ interface Skill {
 interface VisualResume {
   videoUrl?: string;  
 }
-interface SocialLink {
-  platform: string; 
-  url: string;
+interface SocialLinks {
+  github?: string | null;
+  linkedin?: string | null;
+  [key: string]: string | null | undefined; 
 }
+
 
 
 interface User {
@@ -43,7 +45,7 @@ interface User {
  projects?: { title: string; description: string; imageUrl: string }[];
 caseStudies?: { title: string; description: string; imageUrl: string }[];
 visualResume?: VisualResume;
-socialLinks?: SocialLink[];
+socialLinks?: SocialLinks;
 
 }
 
@@ -301,14 +303,15 @@ console.log(dataToShow);
  {/* Right */}
             <div className="flex gap-10">
                 <div className="flex items-center gap-3 text-gray-600 border border-gray-300 rounded-full px-4 py-1 text-sm">
-                <a href={user.socialLinks?.github}><FaGithub size={20} /></a>
+                <a href={user.socialLinks?.github ?? "#"}><FaGithub size={20} /></a>
                 GitHub
                 </div>
                 <div className="flex items-center gap-3 text-gray-600 border border-gray-300 rounded-full px-4 py-1 text-sm">
-                <a href={user.socialLinks?.linkedin}><FaLinkedin size={20} /></a>
+                <a href={user.socialLinks?.linkedin ?? "#"}><FaLinkedin size={20} /></a>
                 LinkedIn
                 </div>
             </div>
+            
             </div>
 
 
