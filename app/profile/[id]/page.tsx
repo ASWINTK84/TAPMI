@@ -83,7 +83,13 @@ useEffect(() => {
 }, [userId]);
 
 
-  if (loading) return <p>Loading...</p>;
+   if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-16 h-16 border-4 border-orange-400 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
   if (!user) return <p>User not found</p>;
 
 
@@ -159,21 +165,21 @@ console.log(dataToShow);
         </button>
 
       </div>
-      <div className="my-9 flex justify-between items-center border border-gray-200 rounded-4xl px-8 py-8 max-w-6xl mx-auto  shadow-sm">
+      <div className="my-9 flex justify-between  items-center border border-gray-200 rounded-4xl px-8 py-6 max-w-6xl mx-auto  shadow-sm">
            
-            <span className="text-sm font-semibold text-gray-500 cursor-pointer">
+            <span className="text-xs sm:text-sm p-2 font-semibold text-gray-500 cursor-pointer">
                 Core Skills & Technical Proficiencies
             </span>
-            <span className="text-sm font-semibold text-gray-500 cursor-pointer">
+            <span className="text-xs sm:text-sm p-2 font-semibold text-gray-500 cursor-pointer">
                 Professional Journey & Internship Roles
             </span>
-            <span className="text-sm font-semibold text-gray-500 cursor-pointer">
+            <span className="text-xs sm:text-sm p-2 font-semibold text-gray-500 cursor-pointer">
                 Case Insights & Key Projects
             </span>
-            <span className="text-sm font-semibold text-gray-500 cursor-pointer">
+            <span className="text-xs sm:text-sm p-2 font-semibold text-gray-500 cursor-pointer">
                 Learning & Academic Milestones
             </span>
-            <span className="text-sm font-semibold text-gray-500 cursor-pointer">
+            <span className="text-xs sm:text-sm p-2 font-semibold text-gray-500 cursor-pointer">
                 Endorsements from Mentors & Peers
             </span>
         </div>
@@ -188,22 +194,22 @@ console.log(dataToShow);
         </div>
 
 
-        <div className="flex justify-center items-center gap-12 py-8 bg-white">
-            
-            {
-                user.skills?.map((skill, i)=> (
-                    <img key={i} src={skill.iconUrl} alt={skill.name} className="h-30 opacity-25" />
-                ))
-            }
-         </div>
+        <div className="py-8 my-20 bg-white">
+          <div className="flex flex-wrap justify-center items-center gap-18 overflow-x-auto scrollbar-hide px-4">
+            {user.skills?.map((skill, i) => (
+              <img  key={i} src={skill.iconUrl} alt={skill.name} className="h-25 opacity-25 hover:opacity-100 transition"/>
+            ))}
+          </div>
+        </div>
+
 
 
          <div className="max-w-6xl mx-auto py-12 px-4 relative">
-      <h2 className="text-4xl font-bold text-gray-800 mb-8 max-w-80">
+      <h2 className="text-4xl font-bold text-gray-800 mb-16 max-w-80">
         Case Insights & Key Projects
       </h2>
 
-      {/* // Project or casestudy */}
+      {/* // Project and casestudy */}
       <div className="absolute top-20 right-0 flex space-x-2 border rounded-3xl p-1">
         <button
           className={`px-4 py-2 rounded-3xl font-medium transition ${
@@ -269,13 +275,11 @@ console.log(dataToShow);
         <h2 className="my-5 text-5xl font-bold text-gray-800">Visual Resume</h2>
         <div className="mt-20 relative w-full max-w-5xl mx-auto rounded-[15px] overflow-hidden shadow-md">
             <div className="aspect-video">
-            <iframe
-                className="w-full h-full"
-                src={user.visualResume?.videoUrl}
+            <iframe className="w-full h-full"
+                 src={user.visualResume?.videoUrl}
                 title="Visual Resume Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-            ></iframe>
+                allowFullScreen></iframe>
             </div>
             
         </div>
@@ -294,6 +298,7 @@ console.log(dataToShow);
                 </button>
                 </a>
             </div>
+
 
             <div className="flex justify-between max-w-6xl w-full m-5 flex-wrap">
     {/* Left */}
