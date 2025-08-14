@@ -41,7 +41,7 @@ export default function RootLayout({
         <main>{children}</main>
 
         <footer className="bg-gray-100 p-4  flex flex-col items-center font-sans">
-          <p className="text-gray-400 text-xs mb-25">© 2024 MAHE BLRU </p>
+          <p className="text-gray-400 text-xs">© 2024 MAHE BLRU </p>
         </footer>
       </body>
     </html>
